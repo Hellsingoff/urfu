@@ -24,7 +24,7 @@ abstract class TranslatableModel extends Model
         $fieldTranslations = $this->fields()
             ->where('attribute', $field)
             ->get()
-            ->keyBy('language');
+            ->mapWithKeys(fn (Field $item) => [$item->language->value => $item]);
 
         if (isset($fieldTranslations[$language->value])) {
             return $fieldTranslations[$language->value]->value;

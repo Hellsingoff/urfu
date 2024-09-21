@@ -7,6 +7,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @method static self create(array $params = [])
+ */
 class Category extends TranslatableModel
 {
     use HasFactory;
