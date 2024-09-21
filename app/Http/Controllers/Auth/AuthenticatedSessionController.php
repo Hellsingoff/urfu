@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enum\UserRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -24,7 +24,11 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         /** @var User $user */
         $user = Auth::user();
-        $token = $user->createToken('api', ['user'])->plainTextToken;
+        $abilities = match ($user->role) {
+            UserRole::User => ['user'],
+            UserRole::Moderator => ['moderator', 'user'],
+        };
+        $token = $user->createToken('api', $abilities)->plainTextToken;
 
         return response()->json(['token' => $token]); // todo meh
     }
