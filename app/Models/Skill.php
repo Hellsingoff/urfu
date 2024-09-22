@@ -7,6 +7,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property int $id
+ * @method static self create(array $params = [])
+ */
 class Skill extends TranslatableModel
 {
     use HasFactory;
