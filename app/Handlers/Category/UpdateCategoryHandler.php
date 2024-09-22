@@ -1,16 +1,17 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Handlers\Category;
 
 use App\Models\Category;
 
-class CreateCategoryHandler
+class UpdateCategoryHandler
 {
-    public function handle(CreateCategoryCommand $command): Category
+    public function handle(UpdateCategoryCommand $command): Category
     {
-        $category = Category::create();
+        $command->category->fields()->delete();
+
         $fields = [];
         foreach ($command->languages as $language) {
             $fields[] = [
@@ -20,8 +21,8 @@ class CreateCategoryHandler
             ];
         }
 
-        $category->fields()->createMany($fields);
+        $command->category->fields()->createMany($fields);
 
-        return $category;
+        return $command->category;
     }
 }

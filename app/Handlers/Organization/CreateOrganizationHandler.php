@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Handlers\Category;
+namespace App\Handlers\Organization;
 
-use App\Models\Category;
+use App\Models\Organization;
 
-class CreateCategoryHandler
+class CreateOrganizationHandler
 {
-    public function handle(CreateCategoryCommand $command): Category
+    public function handle(CreateOrganizationCommand $command): Organization
     {
-        $category = Category::create();
+        $organization = Organization::create();
         $fields = [];
         foreach ($command->languages as $language) {
             $fields[] = [
@@ -20,8 +20,8 @@ class CreateCategoryHandler
             ];
         }
 
-        $category->fields()->createMany($fields);
+        $organization->fields()->createMany($fields);
 
-        return $category;
+        return $organization;
     }
 }

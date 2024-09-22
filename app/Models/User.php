@@ -13,6 +13,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property UserRole $role
+ * @method static self create(array $params)
+ */
 class User extends Authenticatable implements Gradable
 {
     use HasFactory, Notifiable, HasApiTokens;

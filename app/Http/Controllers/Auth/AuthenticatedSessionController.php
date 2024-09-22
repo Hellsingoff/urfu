@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enum\UserRole;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\SuccessResource;
+use App\Http\Resources\TokenResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,7 +20,7 @@ class AuthenticatedSessionController
      * Handle an incoming authentication request.
      * @throws ValidationException
      */
-    public function store(LoginRequest $request): JsonResponse
+    public function store(LoginRequest $request): TokenResource
     {
         $request->authenticate();
         /** @var User $user */
@@ -29,13 +31,13 @@ class AuthenticatedSessionController
         };
         $token = $user->createToken('api', $abilities)->plainTextToken;
 
-        return response()->json(['token' => $token]); // todo meh
+        return new TokenResource($token);
     }
 
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): JsonResponse
+    public function destroy(Request $request): SuccessResource
     {
         /** @var User $user */
         $user = Auth::user();
@@ -43,6 +45,6 @@ class AuthenticatedSessionController
         preg_match('/^(\d+)\|.+$/', $token, $match);
         $user->tokens()->where('id', $match[1])->delete();
 
-        return response()->json(['success' => true]); // todo meh
+        return new SuccessResource('Logout successfully.');
     }
 }

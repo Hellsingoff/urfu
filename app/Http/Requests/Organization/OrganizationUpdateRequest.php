@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Organization;
 
 use App\Enum\Language;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CategoryStoreRequest extends FormRequest
+class OrganizationUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
