@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Resources\Category;
+namespace App\Http\Resources;
 
 use App\Enum\Language;
-use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property Category $resource
+ * @property User $resource
  */
-class CategoryResource extends JsonResource
+class UserResource extends JsonResource
 {
-    public function __construct(Category $user)
+    public function __construct(User $user)
     {
         parent::__construct($user);
     }
@@ -22,14 +22,16 @@ class CategoryResource extends JsonResource
     /**
      * @return array{
      *     id: int,
-     *     name: string
+     *     name: string,
+     *     role: string
      * }
      */
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->resource->id,
-            'name' => $this->resource->fieldValue('name', Language::from(app()->getLocale())),
+            'name' => $this->resource->name,
+            'role' => $this->resource->role->label(Language::from(app()->getLocale())),
         ];
     }
 }

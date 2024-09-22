@@ -11,7 +11,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Ramsey\Collection\Collection;
 
+/**
+ * @property-read int $id
+ * @property-read Category $category
+ * @property-read Organization $organization
+ * @property-read User $owner
+ * @property-read VacancyStatus $status
+ * @property-read Collection<int, Skill> $skills
+ * @method static self create(array $params = [])
+ */
 class Vacancy extends TranslatableModel implements Gradable
 {
     use HasFactory;
@@ -44,7 +54,7 @@ class Vacancy extends TranslatableModel implements Gradable
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function responses(): HasMany
@@ -57,7 +67,7 @@ class Vacancy extends TranslatableModel implements Gradable
         return $this->morphMany(Review::class, 'gradable');
     }
 
-    public function rating(): float
+    public function rating(): ?float
     {
         return $this->reviews()->avg('grade');
     }

@@ -36,10 +36,11 @@ readonly class CategoryController
 
     public function store(CategoryStoreRequest $request): CategoryTranslationsResource
     {
-        $languages = $request->get('languages');
+        $data = $request->validated();
+        $languages = $data['languages'];
         $names = [];
         foreach ($languages as $language) {
-            $names[$language] = $request->get('name')[$language];
+            $names[$language] = $data['name'][$language];
         }
         $category = $this->createCategoryHandler->handle(
             new CreateCategoryCommand(
@@ -62,10 +63,11 @@ readonly class CategoryController
 
     public function update(CategoryUpdateRequest $request, Category $category): CategoryTranslationsResource
     {
-        $languages = $request->get('languages');
+        $data = $request->validated();
+        $languages = $data['languages'];
         $names = [];
         foreach ($languages as $language) {
-            $names[$language] = $request->get('name')[$language];
+            $names[$language] = $data['name'][$language];
         }
         $category = $this->updateCategoryHandler->handle(
             new UpdateCategoryCommand(
@@ -89,8 +91,9 @@ readonly class CategoryController
 
     public function index(CategoryCollectionRequest $request): CategoryCollectionResource|PaginatedCategoryCollectionResource
     {
-        $withoutPagination = (boolean) $request->without_pagination ?? false;
-        $page = $withoutPagination ? null : (int) $request->page ?? 1;
+        $data = $request->validated();
+        $withoutPagination = (boolean) $data['without_pagination'] ?? false;
+        $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
         $categories = $this->getCategoryCollectionHandler->handle(
             new GetCategoryCollectionCommand(
                 $withoutPagination,

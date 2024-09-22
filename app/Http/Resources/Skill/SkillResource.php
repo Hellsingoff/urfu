@@ -14,9 +14,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class SkillResource extends JsonResource
 {
-    public function __construct(Skill $category)
+    public function __construct(Skill $skill)
     {
-        parent::__construct($category);
+        parent::__construct($skill);
     }
 
     /**

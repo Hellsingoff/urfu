@@ -36,19 +36,20 @@ readonly class SkillController
 
     public function store(SkillStoreRequest $request): SkillTranslationsResource
     {
-        $languages = $request->get('languages');
+        $data = $request->validated();
+        $languages = $data['languages'];
         $names = [];
         foreach ($languages as $language) {
-            $names[$language] = $request->get('name')[$language];
+            $names[$language] = $data['name'][$language];
         }
-        $organization = $this->createSkillHandler->handle(
+        $skill = $this->createSkillHandler->handle(
             new CreateSkillCommand(
                 $languages,
                 $names,
             )
         );
 
-        return new SkillTranslationsResource($organization);
+        return new SkillTranslationsResource($skill);
     }
 
     public function show(SkillShowRequest $request, Skill $skill): SkillTranslationsResource|SkillResource
@@ -62,12 +63,13 @@ readonly class SkillController
 
     public function update(SkillUpdateRequest $request, Skill $skill): SkillTranslationsResource
     {
-        $languages = $request->get('languages');
+        $data = $request->validated();
+        $languages = $data['languages'];
         $names = [];
         foreach ($languages as $language) {
-            $names[$language] = $request->get('name')[$language];
+            $names[$language] = $data['name'][$language];
         }
-        $organization = $this->updateSkillHandler->handle(
+        $skill = $this->updateSkillHandler->handle(
             new UpdateSkillCommand(
                 $skill,
                 $languages,
@@ -75,7 +77,7 @@ readonly class SkillController
             )
         );
 
-        return new SkillTranslationsResource($organization);
+        return new SkillTranslationsResource($skill);
     }
 
     public function destroy(Skill $skill): SuccessResource
@@ -89,8 +91,9 @@ readonly class SkillController
 
     public function index(SkillCollectionRequest $request): SkillCollectionResource|PaginatedSkillCollectionResource
     {
-        $withoutPagination = (boolean) $request->without_pagination ?? false;
-        $page = $withoutPagination ? null : (int) $request->page ?? 1;
+        $data = $request->validated();
+        $withoutPagination = (boolean) $data['without_pagination'] ?? false;
+        $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
         $skills = $this->getSkillCollectionHandler->handle(
             new GetSkillCollectionCommand(
                 $withoutPagination,

@@ -7,13 +7,15 @@ namespace App\Models;
 use App\Enum\UserRole;
 use App\Models\Interfaces\Gradable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
+ * @property-read int $id
+ * @property string $name
  * @property UserRole $role
  * @method static self create(array $params)
  */
@@ -57,9 +59,9 @@ class User extends Authenticatable implements Gradable
         ];
     }
 
-    public function resume(): HasOne
+    public function resume(): HasMany
     {
-        return $this->hasOne(Resume::class);
+        return $this->hasMany(Resume::class);
     }
 
     public function reviews(): MorphMany
@@ -67,7 +69,7 @@ class User extends Authenticatable implements Gradable
         return $this->morphMany(Review::class, 'gradable');
     }
 
-    public function rating(): float
+    public function rating(): ?float
     {
         return $this->reviews()->avg('grade');
     }

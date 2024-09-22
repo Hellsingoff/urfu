@@ -8,5 +8,5 @@ interface Gradable
 {
     public function reviews(): MorphMany;
 
-    public function rating(): float;
+    public function rating(): ?float;
 }

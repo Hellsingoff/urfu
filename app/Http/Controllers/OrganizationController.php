@@ -36,10 +36,11 @@ readonly class OrganizationController
 
     public function store(CategoryStoreRequest $request): OrganizationTranslationsResource
     {
-        $languages = $request->get('languages');
+        $data = $request->validated();
+        $languages = $data['languages'];
         $names = [];
         foreach ($languages as $language) {
-            $names[$language] = $request->get('name')[$language];
+            $names[$language] = $data['name'][$language];
         }
         $organization = $this->createOrganizationHandler->handle(
             new CreateOrganizationCommand(
@@ -62,10 +63,11 @@ readonly class OrganizationController
 
     public function update(OrganizationUpdateRequest $request, Organization $organization): OrganizationTranslationsResource
     {
-        $languages = $request->get('languages');
+        $data = $request->validated();
+        $languages = $data['languages'];
         $names = [];
         foreach ($languages as $language) {
-            $names[$language] = $request->get('name')[$language];
+            $names[$language] = $data['name'][$language];
         }
         $organization = $this->updateOrganizationHandler->handle(
             new UpdateOrganizationCommand(
@@ -89,8 +91,9 @@ readonly class OrganizationController
 
     public function index(OrganizationCollectionRequest $request): OrganizationCollectionResource|PaginatedOrganizationCollectionResource
     {
-        $withoutPagination = (boolean) $request->without_pagination ?? false;
-        $page = $withoutPagination ? null : (int) $request->page ?? 1;
+        $data = $request->validated();
+        $withoutPagination = (boolean) $data['without_pagination'] ?? false;
+        $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
         $organizations = $this->getOrganizationCollectionHandler->handle(
             new GetOrganizationCollectionCommand(
                 $withoutPagination,
