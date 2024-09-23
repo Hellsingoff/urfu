@@ -93,7 +93,7 @@ readonly class OrganizationController
     {
         $data = $request->validated();
         $withoutPagination = isset($data['without_pagination']) && (boolean) $data['without_pagination'];
-        $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
+        $page = $withoutPagination ? null : (int) ($data['page'] ?? 1);
         $organizations = $this->getOrganizationCollectionHandler->handle(
             new GetOrganizationCollectionCommand(
                 $withoutPagination,

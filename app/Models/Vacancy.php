@@ -6,18 +6,19 @@ namespace App\Models;
 
 use App\Enum\VacancyStatus;
 use App\Models\Interfaces\Gradable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Ramsey\Collection\Collection;
 
 /**
  * @property-read int $id
  * @property-read Category $category
  * @property-read Organization $organization
  * @property-read User $owner
+ * @property-read int $user_id
  * @property-read VacancyStatus $status
  * @property-read Collection<int, Skill> $skills
  * @method static self create(array $params = [])
@@ -59,7 +60,7 @@ class Vacancy extends TranslatableModel implements Gradable
 
     public function responses(): HasMany
     {
-        return $this->hasMany(VacancyResponse::class);
+        return $this->hasMany(VacancyResponse::class)->orderBy('updated_at', 'desc');
     }
 
     public function reviews(): MorphMany

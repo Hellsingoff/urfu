@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $name
  * @property int $user_id
  * @method static self create(array $params = [])
+ * @method static self find(int $id)
  */
 class Resume extends Model
 {

@@ -93,7 +93,7 @@ readonly class SkillController
     {
         $data = $request->validated();
         $withoutPagination = isset($data['without_pagination']) && (boolean) $data['without_pagination'];
-        $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
+        $page = $withoutPagination ? null : (int) ($data['page'] ?? 1);
         $skills = $this->getSkillCollectionHandler->handle(
             new GetSkillCollectionCommand(
                 $withoutPagination,

@@ -19,6 +19,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name
  * @property UserRole $role
  * @property-read Collection<int, Resume> $resume
+ * @property-read Collection<int, VacancyResponse> $responses
  * @method static self create(array $params)
  */
 class User extends Authenticatable implements Gradable
@@ -69,6 +70,16 @@ class User extends Authenticatable implements Gradable
     public function reviews(): MorphMany
     {
         return $this->morphMany(Review::class, 'gradable');
+    }
+
+    public function responses(): HasMany
+    {
+        return $this->hasMany(VacancyResponse::class)->orderBy('updated_at', 'desc');
+    }
+
+    public function vacancies(): HasMany
+    {
+        return $this->hasMany(Vacancy::class)->orderBy('updated_at', 'desc');
     }
 
     public function rating(): ?float

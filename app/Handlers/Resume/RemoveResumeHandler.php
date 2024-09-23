@@ -15,7 +15,7 @@ readonly class RemoveResumeHandler
 
     public function handle(RemoveResumeCommand $command): void
     {
-        $this->filesystem->delete('resumes/' . $command->resume->filename);
+        $this->filesystem->delete('resumes/' . $command->resume->filename . '.pdf');
         $command->resume->delete();
     }
 }

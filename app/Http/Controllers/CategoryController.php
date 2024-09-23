@@ -93,7 +93,7 @@ readonly class CategoryController
     {
         $data = $request->validated();
         $withoutPagination = isset($data['without_pagination']) && (boolean) $data['without_pagination'];
-        $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
+        $page = $withoutPagination ? null : (int) ($data['page'] ?? 1);
         $categories = $this->getCategoryCollectionHandler->handle(
             new GetCategoryCollectionCommand(
                 $withoutPagination,

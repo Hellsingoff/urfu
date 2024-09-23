@@ -27,6 +27,9 @@ readonly class ResumeController
     ){
     }
 
+    /**
+     * @throws HttpException
+     */
     public function store(ResumeStoreRequest $request): ResumeResource
     {
         $data = $request->validated();
@@ -34,13 +37,15 @@ readonly class ResumeController
             new CreateResumeCommand(
                 $data['file'],
                 $data['name'],
-                Auth::id(),
             )
         );
 
         return new ResumeResource($resume);
     }
 
+    /**
+     * @throws HttpException
+     */
     public function update(ResumeUpdateRequest $request, Resume $resume): ResumeResource
     {
         if (Auth::id() !== $resume->user_id) {
@@ -58,6 +63,9 @@ readonly class ResumeController
         return new ResumeResource($resume);
     }
 
+    /**
+     * @throws HttpException
+     */
     public function destroy(Resume $resume): SuccessResource
     {
         if (Auth::id() !== $resume->user_id) {
