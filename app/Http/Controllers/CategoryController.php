@@ -92,7 +92,7 @@ readonly class CategoryController
     public function index(CategoryCollectionRequest $request): CategoryCollectionResource|PaginatedCategoryCollectionResource
     {
         $data = $request->validated();
-        $withoutPagination = (boolean) $data['without_pagination'] ?? false;
+        $withoutPagination = isset($data['without_pagination']) && (boolean) $data['without_pagination'];
         $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
         $categories = $this->getCategoryCollectionHandler->handle(
             new GetCategoryCollectionCommand(

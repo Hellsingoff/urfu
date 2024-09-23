@@ -6,7 +6,7 @@ namespace App\Handlers\Vacancy;
 
 use App\Models\Vacancy;
 
-class UpdateVacancyHandler
+readonly class UpdateVacancyHandler
 {
     public function handle(UpdateVacancyCommand $command): Vacancy
     {

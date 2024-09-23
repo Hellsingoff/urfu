@@ -14,9 +14,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class CategoryResource extends JsonResource
 {
-    public function __construct(Category $user)
+    public function __construct(Category $category)
     {
-        parent::__construct($user);
+        parent::__construct($category);
     }
 
     /**

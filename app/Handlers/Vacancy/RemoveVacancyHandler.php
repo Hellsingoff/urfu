@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handlers\Vacancy;
 
-class RemoveVacancyHandler
+readonly class RemoveVacancyHandler
 {
     public function handle(RemoveVacancyCommand $command): void
     {

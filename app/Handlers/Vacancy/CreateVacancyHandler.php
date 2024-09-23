@@ -7,7 +7,7 @@ namespace App\Handlers\Vacancy;
 use App\Enum\VacancyStatus;
 use App\Models\Vacancy;
 
-class CreateVacancyHandler
+readonly class CreateVacancyHandler
 {
     public function handle(CreateVacancyCommand $command): Vacancy
     {
@@ -32,7 +32,7 @@ class CreateVacancyHandler
         }
 
         $vacancy->fields()->createMany($fields);
-        $vacancy->skills()->sync($command->skills);
+        $vacancy->skills()->attach($command->skills);
 
         return $vacancy;
     }

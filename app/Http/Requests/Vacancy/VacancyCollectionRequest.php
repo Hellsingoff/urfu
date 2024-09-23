@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Vacancy;
 
+use App\Enum\VacancyStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -22,10 +23,16 @@ class VacancyCollectionRequest extends FormRequest
      *
      * @return array<string, Rule|array|string>
      */
-    public function rules(): array // todo filters
+    public function rules(): array
     {
         return [
             'page' => ['integer', 'min:1'],
+            'status' => [Rule::enum(VacancyStatus::class)],
+            'category_id' => ['integer', 'exists:categories,id'],
+            'organization_id' => ['integer', 'exists:organizations,id'],
+            'skills' => ['array'],
+            'skills.*' => ['integer', 'exists:skills,id'],
+            'text' => ['string', 'min:1'],
         ];
     }
 }

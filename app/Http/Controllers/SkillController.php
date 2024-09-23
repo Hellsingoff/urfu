@@ -92,7 +92,7 @@ readonly class SkillController
     public function index(SkillCollectionRequest $request): SkillCollectionResource|PaginatedSkillCollectionResource
     {
         $data = $request->validated();
-        $withoutPagination = (boolean) $data['without_pagination'] ?? false;
+        $withoutPagination = isset($data['without_pagination']) && (boolean) $data['without_pagination'];
         $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
         $skills = $this->getSkillCollectionHandler->handle(
             new GetSkillCollectionCommand(

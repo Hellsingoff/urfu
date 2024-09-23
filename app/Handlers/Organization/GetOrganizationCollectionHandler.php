@@ -8,7 +8,7 @@ use App\Models\Organization;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class GetOrganizationCollectionHandler
+readonly class GetOrganizationCollectionHandler
 {
     public function handle(GetOrganizationCollectionCommand $command): Collection|LengthAwarePaginator
     {

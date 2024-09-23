@@ -7,7 +7,7 @@ namespace App\Handlers\Organization;
 use App\Models\Field;
 use App\Models\Vacancy;
 
-class RemoveOrganizationHandler
+readonly class RemoveOrganizationHandler
 {
     public function handle(RemoveOrganizationCommand $command): void
     {

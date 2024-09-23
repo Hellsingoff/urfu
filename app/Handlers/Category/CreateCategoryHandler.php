@@ -6,7 +6,7 @@ namespace App\Handlers\Category;
 
 use App\Models\Category;
 
-class CreateCategoryHandler
+readonly class CreateCategoryHandler
 {
     public function handle(CreateCategoryCommand $command): Category
     {

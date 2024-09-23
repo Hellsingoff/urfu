@@ -6,7 +6,7 @@ namespace App\Handlers\Skill;
 
 use App\Models\Skill;
 
-class CreateSkillHandler
+readonly class CreateSkillHandler
 {
     public function handle(CreateSkillCommand $command): Skill
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\DTO\VacancyFiltersDTO;
 use App\Enum\VacancyStatus;
 use App\Handlers\Vacancy\CreateVacancyCommand;
 use App\Handlers\Vacancy\CreateVacancyHandler;
@@ -23,7 +24,6 @@ use App\Http\Resources\Vacancy\VacancyResource;
 use App\Http\Resources\Vacancy\VacancyTranslationsResource;
 use App\Models\Vacancy;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 readonly class VacancyController
 {
@@ -71,9 +71,6 @@ readonly class VacancyController
 
     public function update(VacancyUpdateRequest $request, Vacancy $vacancy): VacancyTranslationsResource
     {
-        if (Auth::id() !== $vacancy->owner->id) {
-            throw new HttpException(403, 'Forbidden');
-        }
         $data = $request->validated();
         $languages = $data['languages'];
         $names = [];
@@ -109,11 +106,19 @@ readonly class VacancyController
 
     public function index(VacancyCollectionRequest $request): PaginatedVacancyCollectionResource
     {
-        $data = $request->validated(); // todo filters
+        $data = $request->validated();
         $page = (int) $data['page'] ?? 1;
+        $filters = new VacancyFiltersDTO(
+            isset($data['status']) ? VacancyStatus::from($data['status']) : null,
+            isset($data['category_id']) ? (int) $data['category_id'] : null,
+            isset($data['organization_id']) ? (int) $data['organization_id'] : null,
+            $data['skills'] ?? [],
+            $data['text'] ?? null,
+        );
         $vacancies = $this->getVacancyCollectionHandler->handle(
             new GetVacancyCollectionCommand(
-                $page
+                $page,
+                $filters,
             )
         );
 

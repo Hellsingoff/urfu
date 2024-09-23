@@ -8,7 +8,7 @@ use App\Models\Skill;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class GetSkillCollectionHandler
+readonly class GetSkillCollectionHandler
 {
     public function handle(GetSkillCollectionCommand $command): Collection|LengthAwarePaginator
     {

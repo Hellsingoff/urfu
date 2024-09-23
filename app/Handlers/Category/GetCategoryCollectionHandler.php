@@ -8,7 +8,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class GetCategoryCollectionHandler
+readonly class GetCategoryCollectionHandler
 {
     public function handle(GetCategoryCollectionCommand $command): Collection|LengthAwarePaginator
     {

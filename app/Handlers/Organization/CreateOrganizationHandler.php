@@ -6,7 +6,7 @@ namespace App\Handlers\Organization;
 
 use App\Models\Organization;
 
-class CreateOrganizationHandler
+readonly class CreateOrganizationHandler
 {
     public function handle(CreateOrganizationCommand $command): Organization
     {

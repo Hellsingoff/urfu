@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enum\UserRole;
 use App\Models\Interfaces\Gradable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -17,6 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int $id
  * @property string $name
  * @property UserRole $role
+ * @property-read Collection<int, Resume> $resume
  * @method static self create(array $params)
  */
 class User extends Authenticatable implements Gradable

@@ -7,7 +7,7 @@ namespace App\Handlers\Category;
 use App\Models\Field;
 use App\Models\Vacancy;
 
-class RemoveCategoryHandler
+readonly class RemoveCategoryHandler
 {
     public function handle(RemoveCategoryCommand $command): void
     {

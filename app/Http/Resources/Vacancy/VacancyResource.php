@@ -18,9 +18,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class VacancyResource extends JsonResource
 {
-    public function __construct(Vacancy $user)
+    public function __construct(Vacancy $vacancy)
     {
-        parent::__construct($user);
+        parent::__construct($vacancy);
     }
 
     /**

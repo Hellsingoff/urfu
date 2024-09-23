@@ -6,7 +6,7 @@ namespace App\Handlers\Category;
 
 use App\Models\Category;
 
-class UpdateCategoryHandler
+readonly class UpdateCategoryHandler
 {
     public function handle(UpdateCategoryCommand $command): Category
     {

@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property-read int $id
+ * @property string $filename
+ * @property string $name
+ * @property int $user_id
+ * @method static self create(array $params = [])
+ */
 class Resume extends Model
 {
     use HasFactory;

@@ -92,7 +92,7 @@ readonly class OrganizationController
     public function index(OrganizationCollectionRequest $request): OrganizationCollectionResource|PaginatedOrganizationCollectionResource
     {
         $data = $request->validated();
-        $withoutPagination = (boolean) $data['without_pagination'] ?? false;
+        $withoutPagination = isset($data['without_pagination']) && (boolean) $data['without_pagination'];
         $page = $withoutPagination ? null : (int) $data['page'] ?? 1;
         $organizations = $this->getOrganizationCollectionHandler->handle(
             new GetOrganizationCollectionCommand(
