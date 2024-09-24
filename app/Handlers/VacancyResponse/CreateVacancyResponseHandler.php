@@ -21,7 +21,7 @@ readonly class CreateVacancyResponseHandler
             'vacancy_id' => $command->vacancyId,
         ])->exists();
         if ($responseExists) {
-            throw new HttpException(403, 'Vacancy already created.');
+            throw new HttpException(403, __('messages.forbidden'));
         }
         $response = VacancyResponse::create([
             'user_id' => $command->userId,

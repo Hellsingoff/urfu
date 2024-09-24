@@ -1,0 +1,26 @@
+{
+    "navbar": {
+        "vacancies": "Вакансии",
+        "home": "Главная",
+        "profile": "Профиль",
+        "logout": "Выход",
+        "login": "Вход",
+        "register": "Регистрация"
+    },
+    "login": {
+        "title": "Вход",
+        "email": "Email",
+        "password": "Пароль",
+        "submit": "Войти"
+    },
+    "vacancies": {
+        "title": "Вакансии",
+        "category": "Категория",
+        "organization": "Организация",
+        "skills": "Навыки"
+    },
+    "pagination": {
+        "prev": "Предыдущая",
+        "next": "Следующая"
+    }
+}

@@ -131,7 +131,7 @@ readonly class VacancyController
     public function responses(VacancyResponseCollectionRequest $request, Vacancy $vacancy): PaginatedVacancyResponseCollectionResource
     {
         if ($vacancy->user_id !== Auth::id()) {
-            throw new HttpException(403, 'Access denied');
+            throw new HttpException(403, __('messages.forbidden'));
         }
 
         $data = $request->validated();

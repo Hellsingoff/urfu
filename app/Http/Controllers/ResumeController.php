@@ -49,7 +49,7 @@ readonly class ResumeController
     public function update(ResumeUpdateRequest $request, Resume $resume): ResumeResource
     {
         if (Auth::id() !== $resume->user_id) {
-            throw new HttpException(403, 'Forbidden');
+            throw new HttpException(403, __('messages.forbidden'));
         }
         $data = $request->validated();
         $resume = $this->updateResumeHandler->handle(
@@ -69,7 +69,7 @@ readonly class ResumeController
     public function destroy(Resume $resume): SuccessResource
     {
         if (Auth::id() !== $resume->user_id) {
-            throw new HttpException(403, 'Forbidden');
+            throw new HttpException(403, __('messages.forbidden'));
         }
         $this->removeResumeHandler->handle(
             new RemoveResumeCommand($resume)

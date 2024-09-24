@@ -1,0 +1,26 @@
+{
+    "navbar": {
+        "vacancies": "Vacancies",
+        "home": "Main",
+        "profile": "Profile",
+        "logout": "Logout",
+        "login": "Login",
+        "register": "Register"
+    },
+    "login": {
+        "title": "Login",
+        "Email": "Email",
+        "password": "Password",
+        "submit": "Login"
+    },
+    "vacancies": {
+        "title": "Vacancies",
+        "category": "Category",
+        "organization": "Organization",
+        "skills": "Skills"
+    },
+    "pagination": {
+        "prev": "Previous",
+        "next": "Next"
+    }
+}

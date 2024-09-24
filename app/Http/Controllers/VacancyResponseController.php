@@ -40,7 +40,7 @@ readonly class VacancyResponseController
     {
         $data = $request->validated();
         if (Resume::find($data['resume_id'])->user_id !== Auth::id()) {
-            throw new HttpException(403, 'Access denied');
+            throw new HttpException(403, __('messages.forbidden'));
         }
         $response = $this->createVacancyResponseHandler->handle(
             new CreateVacancyResponseCommand(
@@ -57,7 +57,7 @@ readonly class VacancyResponseController
     public function update(VacancyResponseUpdateRequest $request, VacancyResponse $vacancyResponse): VacancyResponseResource
     {
         if ($vacancyResponse->vacancy->user_id !== Auth::id()) {
-            throw new HttpException(403, 'Access denied');
+            throw new HttpException(403, __('messages.forbidden'));
         }
         $data = $request->validated();
         $response = $this->updateVacancyResponseHandler->handle(
@@ -76,7 +76,7 @@ readonly class VacancyResponseController
             $vacancyResponse->vacancy->user_id !== Auth::id()
             || $vacancyResponse->user_id !== Auth::id()
         ) {
-            throw new HttpException(403, 'Access denied');
+            throw new HttpException(403, __('messages.forbidden'));
         }
 
         return new VacancyResponseResource($vacancyResponse);
@@ -88,7 +88,7 @@ readonly class VacancyResponseController
             $vacancyResponse->vacancy->user_id !== Auth::id()
             || $vacancyResponse->user_id !== Auth::id()
         ) {
-            throw new HttpException(403, 'Access denied');
+            throw new HttpException(403, __('messages.forbidden'));
         }
 
         return new CommentaryCollectionResource($vacancyResponse->commentaries);
@@ -100,7 +100,7 @@ readonly class VacancyResponseController
             $vacancyResponse->vacancy->user_id !== Auth::id()
             || $vacancyResponse->user_id !== Auth::id()
         ) {
-            throw new HttpException(403, 'Access denied');
+            throw new HttpException(403, __('messages.forbidden'));
         }
         $data = $request->validated();
 
@@ -119,7 +119,7 @@ readonly class VacancyResponseController
     public function cancel(VacancyResponse $vacancyResponse): VacancyResponseResource
     {
         if ($vacancyResponse->user_id !== Auth::id()) {
-            throw new HttpException(403, 'Access denied');
+            throw new HttpException(403, __('messages.forbidden'));
         }
 
         $response = $this->cancelVacancyResponseHandler->handle(

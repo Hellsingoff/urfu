@@ -1,0 +1,25 @@
+{
+    "navbar": {
+        "vacancies": "Stellenangebote",
+        "profile": "Profil",
+        "logout": "Ausloggen",
+        "login": "Anmelden",
+        "register": "Registrieren"
+    },
+    "login": {
+        "title": "Anmeldung",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "submit": "Einloggen"
+    },
+    "vacancies": {
+        "title": "Stellenangebote",
+        "category": "Kategorie",
+        "organization": "Organisation",
+        "skills": "Fähigkeiten"
+    },
+    "pagination": {
+        "prev": "Zurück",
+        "next": "Weiter"
+    }
+}

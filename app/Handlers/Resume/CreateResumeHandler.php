@@ -23,7 +23,7 @@ readonly class CreateResumeHandler
         /** @var User $user */
         $user = Auth::user();
         if (9 < $user->resume()->count()) {
-            throw new HttpException(403, 'You cannot add more than 10 resumes.');
+            throw new HttpException(403, __('messages.forbidden'));
         }
         $filename = (new Ulid())->toString();
         $this->filesystem->putFileAs('resumes', $command->file, $filename . '.pdf');

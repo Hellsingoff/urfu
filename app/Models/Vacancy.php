@@ -65,7 +65,7 @@ class Vacancy extends TranslatableModel implements Gradable
 
     public function reviews(): MorphMany
     {
-        return $this->morphMany(Review::class, 'gradable');
+        return $this->morphMany(Review::class, 'gradable')->where(['is_approved' => true]);
     }
 
     public function rating(): ?float

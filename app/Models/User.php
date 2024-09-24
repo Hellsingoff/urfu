@@ -69,7 +69,7 @@ class User extends Authenticatable implements Gradable
 
     public function reviews(): MorphMany
     {
-        return $this->morphMany(Review::class, 'gradable');
+        return $this->morphMany(Review::class, 'gradable')->where(['is_approved' => true]);
     }
 
     public function responses(): HasMany

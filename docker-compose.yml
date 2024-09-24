@@ -10,7 +10,6 @@ services:
             - 'host.docker.internal:host-gateway'
         ports:
             - '${APP_PORT:-80}:80'
-            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
@@ -48,6 +47,16 @@ services:
                 - '${DB_USERNAME}'
             retries: 3
             timeout: 5s
+    node:
+        image: 'node:18-alpine'
+        working_dir: /var/www/html/resources/frontend/vite-project
+        volumes:
+            - .:/var/www/html
+        ports:
+            - '${VITE_PORT:-5173}:5173'
+        networks:
+            - sail
+        command: "npm run dev"
 networks:
     sail:
         driver: bridge
