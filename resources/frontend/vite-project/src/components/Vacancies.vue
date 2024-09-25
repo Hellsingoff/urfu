@@ -1,32 +1,54 @@
 <template>
     <div class="vacancies-page">
         <h1>{{ $t('vacancies.title') }}</h1>
-
-        <!-- Фильтры -->
         <div class="filters">
-            <input v-model="filters.text" type="text" placeholder="Поиск по тексту..." />
-
-            <select v-model="filters.category_id">
-                <option value="">{{ $t('vacancies.category') }}</option>
-                <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-            </select>
-
-            <select v-model="filters.organization_id">
-                <option value="">{{ $t('vacancies.organization') }}</option>
-                <option v-for="organization in organizations" :key="organization.id" :value="organization.id">{{ organization.name }}</option>
-            </select>
-
-            <Multiselect v-model="filters.skills" :options="skills" label="name" track-by="id" multiple placeholder="Выберите навыки" />
-
-            <button @click="applyFilters">{{ $t('vacancies.filterButton') }}</button>
+            <div class="selects-row">
+                <Multiselect
+                    v-model="filters.category_id"
+                    :options="categories"
+                    label="name"
+                    track-by="id"
+                    :placeholder="$t('vacancies.category')"
+                    :show-labels="false"
+                    :clear-on-select="true"
+                    :preserve-search="true"
+                    class="custom-multiselect"
+                />
+                <Multiselect
+                    v-model="filters.organization_id"
+                    :options="organizations"
+                    label="name"
+                    track-by="id"
+                    :placeholder="$t('vacancies.organization')"
+                    :show-labels="false"
+                    :clear-on-select="true"
+                    :preserve-search="true"
+                    class="custom-multiselect"
+                />
+                <Multiselect
+                    v-model="filters.skills"
+                    :options="skills"
+                    label="name"
+                    track-by="id"
+                    :placeholder="$t('vacancies.skills')"
+                    :multiple="true"
+                    :show-labels="false"
+                    :clear-on-select="true"
+                    :preserve-search="true"
+                    class="custom-multiselect"
+                />
+            </div>
+            <div class="input-button-row">
+                <input v-model="filters.text" type="text" :placeholder="$t('vacancies.placeholderText')" class="search-input" />
+                <button @click="applyFilters" class="search-button">{{ $t('vacancies.filterButton') }}</button>
+            </div>
         </div>
 
-        <!-- Вакансии -->
-        <div v-if="loading" class="loading">Загрузка...</div>
+        <div v-if="loading" class="loading-placeholder"></div>
         <div v-else>
             <div v-if="vacancies.length === 0" class="no-vacancies">{{ $t('vacancies.noVacancies') }}</div>
             <ul class="vacancy-list">
-                <li v-for="vacancy in vacancies" :key="vacancy.id" class="vacancy-item">
+                <li v-for="vacancy in vacancies" :key="vacancy.id" class="vacancy-item" @click="goToVacancy(vacancy.id)">
                     <h2>{{ vacancy.name }}</h2>
                     <p><strong>{{ $t('vacancies.category') }}:</strong> {{ vacancy.category.name }}</p>
                     <p><strong>{{ $t('vacancies.organization') }}:</strong> {{ vacancy.organization.name }}</p>
@@ -47,12 +69,13 @@
 </template>
 
 <script setup>
-import {ref, onMounted, watch} from 'vue';
-import {useI18n} from 'vue-i18n';
+import { ref, onMounted, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import axios from '../../axios/axios.js';
-import Multiselect from '@vueform/multiselect';
+import Multiselect from "vue-multiselect";
+import router from "../../router/index.js";
 
-const {t, locale} = useI18n();
+const { t, locale } = useI18n();
 
 const vacancies = ref([]);
 const categories = ref([]);
@@ -67,6 +90,17 @@ const filters = ref({
     organization_id: '',
     skills: [],
 });
+
+const selectedLanguage = ref(localStorage.getItem('lang') || 'en');
+
+watch(selectedLanguage, (newLang) => {
+    locale.value = newLang;
+    localStorage.setItem('lang', newLang);
+});
+
+const goToVacancy = (id) => {
+    router.push(`/vacancies/${id}`);
+};
 
 const fetchFiltersData = async () => {
     try {
@@ -88,17 +122,17 @@ const fetchVacancies = async (page = 1) => {
 
     const params = {
         page,
-        category_id: filters.value.category_id || undefined,
-        organization_id: filters.value.organization_id || undefined,
+        category_id: filters.value.category_id ? filters.value.category_id.id : undefined,
+        organization_id: filters.value.organization_id ? filters.value.organization_id.id : undefined,
         text: filters.value.text || undefined,
     };
 
-    filters.value.skills.forEach((skill, index) => {
+    filters.value.skills?.forEach((skill, index) => {
         params[`skills[${index}]`] = skill.id;
     });
 
     try {
-        const response = await axios.get('/vacancies', {params});
+        const response = await axios.get('/vacancies', { params });
         vacancies.value = response.data.data;
         pagination.value = response.data.pagination;
         currentPage.value = page;
@@ -130,14 +164,41 @@ onMounted(() => {
     fetchVacancies(currentPage.value);
 });
 
-watch(locale, () => {
-    fetchVacancies(currentPage.value);
+watch(locale, async () => {
+    await fetchFiltersData();
+    filters.value.category_id = categories.value.find(category => category.id === filters.value.category_id?.id) || null;
+    filters.value.organization_id = organizations.value.find(org => org.id === filters.value.organization_id?.id) || null;
+    filters.value.skills = skills.value.filter(skill => filters.value.skills.some(selectedSkill => selectedSkill.id === skill.id));
+    await fetchVacancies(currentPage.value);
 });
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
-.loading {
-    text-align: center;
+.loading-placeholder {
+    background-color: #1e1e1e;
+    border-radius: 16px;
+    height: 150px;
+    margin-bottom: 16px;
+    animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
+    25% {
+        opacity: 0.85;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.85;
+    }
+    100% {
+        opacity: 0.7;
+    }
 }
 
 .no-vacancies {
@@ -208,7 +269,6 @@ watch(locale, () => {
     margin-bottom: 20px;
 }
 
-.filters select,
 .filters input,
 .filters button {
     padding: 8px;
@@ -224,12 +284,40 @@ watch(locale, () => {
     border-color: #646cff;
 }
 
-.filters input {
-    flex: 1 1 100%;
+.filters {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.filters select {
-    flex: 1 1 200px;
+.selects-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
 }
 
+.input-button-row {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: white;
+    border: 2px solid transparent;
+    flex: 1;
+    margin-right: 8px;
+}
+
+.search-button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: white;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+    cursor: pointer;
+}
 </style>

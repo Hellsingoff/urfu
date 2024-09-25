@@ -50,7 +50,8 @@ readonly class GetVacancyCollectionHandler
                     ->where('fields.entity_type', '=', Vacancy::class);
             })
             ->where('fields.value', 'ILIKE', "%{$command->filters->text}%")
-            ->groupBy('vacancies.id');
+            ->distinct()
+            ->select('vacancies.*');
         }
 
         return $query->paginate(24, ['*'], 'page', $command->page);

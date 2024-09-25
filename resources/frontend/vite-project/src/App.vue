@@ -1,7 +1,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { useUserStore } from '../stores/user';
-import {onMounted} from "vue";
+import { onMounted } from "vue";
 
 const { locale } = useI18n();
 const userStore = useUserStore();
@@ -30,6 +30,11 @@ const logout = () => {
             <div class="nav-item">
                 <router-link to="/vacancies" class="link">{{ $t('navbar.vacancies') }}</router-link>
             </div>
+            <template v-if="userStore.isModerator">
+                <div class="nav-item">
+                    <router-link to="/admin" class="link">{{ $t('navbar.admin') }}</router-link>
+                </div>
+            </template>
         </div>
         <div class="settings">
             <template v-if="userStore.isLoggedIn">
@@ -40,7 +45,7 @@ const logout = () => {
                 <router-link to="/login" class="profile-button">{{ $t('navbar.login') }}</router-link>
                 <router-link to="/register" class="profile-button">{{ $t('navbar.register') }}</router-link>
             </template>
-            <select @change="changeLanguage" class="language-select">
+            <select @change="changeLanguage" class="language-select" :value="locale">
                 <option value="en">English</option>
                 <option value="ru">Русский</option>
                 <option value="de">Deutsch</option>
@@ -61,6 +66,7 @@ const logout = () => {
     border-radius: 8px;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 10px;
 }
 
 .nav-links {
@@ -98,6 +104,8 @@ const logout = () => {
     cursor: pointer;
     transition: border-color 0.3s;
     margin-right: 8px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .language-select:hover {
@@ -116,15 +124,16 @@ const logout = () => {
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .profile-button:hover {
     border-color: #646cff;
+    background-color: #3a3a3a;
 }
 
 .content {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 </style>

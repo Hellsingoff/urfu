@@ -64,6 +64,7 @@ const submit = async () => {
 
         const token = response.data.data.token;
         userStore.login(token);
+        await userStore.checkAuth();
         await router.push('/');
     } catch (error) {
         if (error.response && error.response.status === 422) {

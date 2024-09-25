@@ -31,7 +31,8 @@ class UserResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'role' => $this->resource->role->label(Language::from(app()->getLocale())),
+            'role' => $this->resource->role->value,
+            'roleLabel' => $this->resource->role->label(Language::from(app()->getLocale())),
         ];
     }
 }

@@ -5,7 +5,8 @@
         "profile": "Профиль",
         "logout": "Выход",
         "login": "Вход",
-        "register": "Регистрация"
+        "register": "Регистрация",
+        "admin": "Администрирование"
     },
     "login": {
         "title": "Вход",
@@ -17,10 +18,27 @@
         "title": "Вакансии",
         "category": "Категория",
         "organization": "Организация",
-        "skills": "Навыки"
+        "skills": "Навыки",
+        "filterButton": "Поиск",
+        "noVacancies": "Вакансии не найдены",
+        "placeholderText": "Поиск по тексту...",
+        "status": "Статус",
+        "description": "Описание",
+        "owner": "Автор",
+        "back": "Назад",
+        "rating": "Рейтинг"
     },
     "pagination": {
         "prev": "Предыдущая",
         "next": "Следующая"
+    },
+    "admin": {
+        "title": "Админ Панель",
+        "vacancies": "Вакансии",
+        "categories": "Категории",
+        "organizations": "Организации",
+        "skills": "Навыки",
+        "createVacancy": "Создать Вакансию",
+        "send": "Отправить"
     }
 }

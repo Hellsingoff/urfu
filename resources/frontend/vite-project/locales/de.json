@@ -1,10 +1,12 @@
 {
     "navbar": {
         "vacancies": "Stellenangebote",
+        "home": "Startseite",
         "profile": "Profil",
         "logout": "Ausloggen",
-        "login": "Anmelden",
-        "register": "Registrieren"
+        "login": "Einloggen",
+        "register": "Registrieren",
+        "admin": "Verwaltung"
     },
     "login": {
         "title": "Anmeldung",
@@ -16,10 +18,27 @@
         "title": "Stellenangebote",
         "category": "Kategorie",
         "organization": "Organisation",
-        "skills": "Fähigkeiten"
+        "skills": "Fähigkeiten",
+        "filterButton": "Suche",
+        "noVacancies": "Keine Stellenangebote gefunden",
+        "placeholderText": "Suche nach Text...",
+        "status": "Status",
+        "description": "Beschreibung",
+        "owner": "Besitzer",
+        "back": "Zurück",
+        "rating": "Bewertung"
     },
     "pagination": {
         "prev": "Zurück",
         "next": "Weiter"
+    },
+    "admin": {
+        "title": "Admin-Panel",
+        "vacancies": "Stellenangebote",
+        "categories": "Kategorien",
+        "organizations": "Organisationen",
+        "skills": "Fähigkeiten",
+        "createVacancy": "Stellenanzeige erstellen",
+        "send": "Senden"
     }
 }
