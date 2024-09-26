@@ -37,6 +37,9 @@ Route::resource('/vacancies', VacancyController::class)
 Route::middleware(AbilityCheck::class.':moderator')
     ->get('vacancies/{vacancy}/responses', [VacancyController::class, 'responses'])
     ->name('vacancies.responses');
+Route::middleware(AuthCheck::class)
+    ->get('vacancies/{vacancy}/my-responses', [VacancyController::class, 'myResponses'])
+    ->name('vacancies.my-responses');
 
 Route::middleware(AuthCheck::class)
     ->resource('/resumes', ResumeController::class)

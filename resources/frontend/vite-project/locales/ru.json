@@ -40,5 +40,34 @@
         "skills": "Навыки",
         "createVacancy": "Создать Вакансию",
         "send": "Отправить"
+    },
+    "vacancy": {
+        "alreadyResponded": "Вы уже оставили отклик",
+        "resume": "Резюме",
+        "status": "Статус",
+        "downloadResume": "Скачать резюме",
+        "commentaries": "Комментарии",
+        "enterComment": "Введите комментарий",
+        "sendComment": "Отправить комментарий",
+        "respond": "Откликнуться",
+        "selectResume": "Выберите резюме",
+        "chooseResume": "Выберите резюме",
+        "commentary": "Комментарий",
+        "optionalComment": "Опциональный комментарий",
+        "submitResponse": "Отправить отклик",
+        "errorResumeRequired": "Резюме обязательно для выбора",
+        "errorSubmitting": "Ошибка при отправке отклика",
+        "errorSubmittingComment": "Ошибка при отправке комментария"
+    },
+    "profile": {
+        "title": "Профиль",
+        "resumes": "Резюме",
+        "resumeList": "Список резюме",
+        "download": "Скачать",
+        "delete": "Удалить",
+        "resumeName": "Название",
+        "uploadResume": "Сохранить",
+        "responses": "Отклики",
+        "vacancies": "Вакансии"
     }
 }

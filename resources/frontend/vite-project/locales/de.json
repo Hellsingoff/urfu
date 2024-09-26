@@ -40,5 +40,34 @@
         "skills": "Fähigkeiten",
         "createVacancy": "Stellenanzeige erstellen",
         "send": "Senden"
+    },
+    "vacancy": {
+        "alreadyResponded": "Sie haben bereits geantwortet",
+        "resume": "Lebenslauf",
+        "status": "Status",
+        "downloadResume": "Lebenslauf herunterladen",
+        "commentaries": "Kommentare",
+        "enterComment": "Kommentar eingeben",
+        "sendComment": "Kommentar senden",
+        "respond": "Antworten",
+        "selectResume": "Lebenslauf auswählen",
+        "chooseResume": "Lebenslauf wählen",
+        "commentary": "Kommentar",
+        "optionalComment": "Optionaler Kommentar",
+        "submitResponse": "Antwort einreichen",
+        "errorResumeRequired": "Lebenslauf ist erforderlich",
+        "errorSubmitting": "Fehler beim Einreichen der Antwort",
+        "errorSubmittingComment": "Fehler beim Einreichen des Kommentars"
+    },
+    "profile": {
+        "title": "Profil",
+        "resumes": "Lebensläufe",
+        "resumeList": "Lebenslaufliste",
+        "download": "Herunterladen",
+        "delete": "Löschen",
+        "resumeName": "Name",
+        "uploadResume": "Speichern",
+        "responses": "Antworten",
+        "vacancies": "Stellenangebote"
     }
 }

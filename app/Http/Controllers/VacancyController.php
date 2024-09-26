@@ -24,6 +24,7 @@ use App\Http\Resources\Vacancy\PaginatedVacancyCollectionResource;
 use App\Http\Resources\Vacancy\VacancyResource;
 use App\Http\Resources\Vacancy\VacancyTranslationsResource;
 use App\Http\Resources\VacancyResponse\PaginatedVacancyResponseCollectionResource;
+use App\Http\Resources\VacancyResponse\VacancyResponseCollectionResource;
 use App\Models\Vacancy;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -140,5 +141,12 @@ readonly class VacancyController
         return new PaginatedVacancyResponseCollectionResource(
             $vacancy->responses()->paginate(24, ['*'], 'page', $page)
         );
+    }
+
+    public function myResponses(Vacancy $vacancy): VacancyResponseCollectionResource
+    {
+        $response = $vacancy->responses()->where('user_id', Auth::id())->get();
+
+        return new VacancyResponseCollectionResource($response);
     }
 }

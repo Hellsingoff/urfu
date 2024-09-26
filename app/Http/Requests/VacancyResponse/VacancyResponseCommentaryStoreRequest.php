@@ -25,7 +25,7 @@ class VacancyResponseCommentaryStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'commentary' => ['string', 'max:255'],
+            'commentary' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -40,5 +40,34 @@
         "skills": "Skills",
         "createVacancy": "Create Vacancy",
         "send": "Send"
+    },
+    "vacancy": {
+        "alreadyResponded": "You have already responded",
+        "resume": "Resume",
+        "status": "Status",
+        "downloadResume": "Download Resume",
+        "commentaries": "Commentaries",
+        "enterComment": "Enter comment",
+        "sendComment": "Send Comment",
+        "respond": "Respond",
+        "selectResume": "Select Resume",
+        "chooseResume": "Choose Resume",
+        "commentary": "Commentary",
+        "optionalComment": "Optional commentary",
+        "submitResponse": "Submit Response",
+        "errorResumeRequired": "Resume is required",
+        "errorSubmitting": "Error submitting response",
+        "errorSubmittingComment": "Error submitting comment"
+    },
+    "profile": {
+        "title": "Profile",
+        "resumes": "Resumes",
+        "resumeList": "Resume List",
+        "download": "Download",
+        "delete": "Delete",
+        "resumeName": "Name",
+        "uploadResume": "Save",
+        "responses": "Responses",
+        "vacancies": "Vacancies"
     }
 }
