@@ -39,7 +39,9 @@
         "organizations": "Organisationen",
         "skills": "Fähigkeiten",
         "createVacancy": "Stellenanzeige erstellen",
-        "send": "Senden"
+        "send": "Senden",
+        "vacancyName": "Stellenbezeichnung",
+        "description": "Beschreibung"
     },
     "vacancy": {
         "alreadyResponded": "Sie haben bereits geantwortet",

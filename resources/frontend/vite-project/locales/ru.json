@@ -39,7 +39,9 @@
         "organizations": "Организации",
         "skills": "Навыки",
         "createVacancy": "Создать Вакансию",
-        "send": "Отправить"
+        "send": "Отправить",
+        "vacancyName": "Название",
+        "description": "Описание"
     },
     "vacancy": {
         "alreadyResponded": "Вы уже оставили отклик",

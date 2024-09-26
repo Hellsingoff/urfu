@@ -39,7 +39,9 @@
         "organizations": "Organizations",
         "skills": "Skills",
         "createVacancy": "Create Vacancy",
-        "send": "Send"
+        "send": "Send",
+        "vacancyName": "Title",
+        "description": "Description"
     },
     "vacancy": {
         "alreadyResponded": "You have already responded",
